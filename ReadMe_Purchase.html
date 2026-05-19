@@ -1,228 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Purchase Dashboard — ReadMe</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; }
-    .check { display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#d1fae5;color:#059669;font-size:12px;font-weight:700; }
-    .cross { display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#fee2e2;color:#f87171;font-size:12px;font-weight:700; }
-    tr:hover td { background: rgba(0,0,0,0.02); }
-    a { text-decoration:none; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Purchase Dashboard — ReadMe</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; }
+  .header { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: white; padding: 36px 24px; text-align: center; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .header p { color: #94a3b8; font-size: 13px; margin-top: 8px; }
+  .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+  .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 11px; padding: 4px 12px; border-radius: 999px; }
+  .container { max-width: 780px; margin: 0 auto; padding: 20px 16px 40px; }
+  .card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; user-select: none; }
+  .card-header-left { display: flex; align-items: center; gap: 10px; }
+  .card-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .card-title { font-size: 14px; font-weight: 600; color: #1e293b; }
+  .card-toggle { font-size: 11px; color: #94a3b8; }
+  .card-body { padding: 0 16px 16px; }
+  .bg-slate { background: #475569; }
+  .bg-green { background: #059669; }
+  .bg-blue { background: #2563eb; }
+  .bg-purple { background: #7c3aed; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; }
+  .stat-label { font-size: 11px; color: #94a3b8; }
+  .stat-value { font-size: 13px; font-weight: 600; color: #334155; margin-top: 2px; }
+  .note { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; font-size: 13px; color: #64748b; }
+  .note-warn { color: #b45309; }
+  .table-wrap { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin-top: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: #f8fafc; }
+  th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; }
+  th.center { text-align: center; }
+  td { padding: 8px 12px; border-top: 1px solid #f1f5f9; color: #334155; }
+  td.center { text-align: center; }
+  tr:hover td { background: #f8fafc; }
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; }
+  .check-g { display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#d1fae5;color:#059669;font-size:11px;font-weight:700; }
+  .check-b { display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#dbeafe;color:#2563eb;font-size:11px;font-weight:700; }
+  .cross { display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#fee2e2;color:#f87171;font-size:11px;font-weight:700; }
+  .section-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; }
+  hr { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; }
+  .link-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: background 0.15s; }
+  .link-item:hover { background: #f8fafc; }
+  .link-title { font-size: 13px; font-weight: 500; color: #334155; }
+  .link-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .footer { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 8px; }
+  .collapsible-content { display: block; }
+  .collapsible-content.hidden { display: none; }
+</style>
 </head>
 <body>
-<script type="text/babel">
-const { useState } = React;
-const Section = ({ icon, title, color, children }) => {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-      <div className="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onClick={() => setOpen(!open)}>
-        <div className="flex items-center gap-2">
-          <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-white text-sm ${color}`}>{icon}</div>
-          <span className="font-semibold text-slate-800 text-sm">{title}</span>
-        </div>
-        <span className="text-slate-400 text-xs">{open ? "▲" : "▼"}</span>
-      </div>
-      {open && <div className="px-4 pb-4 pt-0">{children}</div>}
-    </div>
-  );
-};
-const Note = ({ emoji, text, color }) => (
-  <div className="flex items-start gap-2 py-1">
-    <span className="text-base leading-none mt-0.5">{emoji}</span>
-    <span className={`text-sm ${color || "text-slate-500"}`}>{text}</span>
+
+<div class="header">
+  <h1>&#128202; Purchase Dashboard</h1>
+  <p>Technical documentation &mdash; Data sources, KPIs &amp; available granularities</p>
+  <div class="badges">
+    <span class="badge">Cockpit</span>
+    <span class="badge">Breakdown by Pole</span>
+    <span class="badge">Estimated Spend</span>
   </div>
-);
-const CoverageTable = () => {
-  const rows = [
-    { dim: "Month", budget: true, cost: true },
-    { dim: "Pole", budget: true, cost: true },
-    { dim: "Order Type", budget: true, cost: true },
-    { dim: "YTD / YTG", budget: true, cost: true },
-    { dim: "Category", budget: true, cost: true, note: "budget source" },
-    { dim: "Product", budget: false, cost: true },
-    { dim: "Supplier", budget: false, cost: true },
-    { dim: "Buyer", budget: false, cost: true },
-    { dim: "Planner", budget: false, cost: true },
-    { dim: "ERP Family", budget: false, cost: true },
-    { dim: "Day", budget: false, cost: true },
-  ];
-  return (
-    <div className="rounded-lg border border-slate-200 overflow-hidden mt-3">
-      <table className="w-full text-sm">
-        <thead className="bg-slate-50">
-          <tr>
-            <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Dimension</th>
-            <th className="text-center py-2 px-3 text-xs font-semibold text-emerald-600">Budget</th>
-            <th className="text-center py-2 px-3 text-xs font-semibold text-blue-600">Actual / Estimated Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ dim, budget, cost, note }) => (
-            <tr key={dim} className="border-t border-slate-100">
-              <td className="py-2 px-3 font-medium text-slate-700">{dim}{note && <span className="ml-1.5 text-xs text-slate-400">({note})</span>}</td>
-              <td className="py-2 px-3 text-center">{budget ? <span className="check">✓</span> : <span className="cross">✗</span>}</td>
-              <td className="py-2 px-3 text-center">{cost ? <span style={{background:'#dbeafe',color:'#2563eb'}} className="check">✓</span> : <span className="cross">✗</span>}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+</div>
+
+<div class="container">
+
+  <!-- OVERVIEW -->
+  <div class="card">
+    <div class="card-header" onclick="toggle('overview')">
+      <div class="card-header-left">
+        <div class="card-icon bg-slate">&#8505;</div>
+        <span class="card-title">Dashboard Overview</span>
+      </div>
+      <span class="card-toggle" id="overview-icon">&#9650;</span>
     </div>
-  );
-};
-const GranularityTable = () => {
-  const rows = [
-    { dim: "Month", t1: true, t2: true },
-    { dim: "Day", t1: false, t2: true },
-    { dim: "Pole", t1: true, t2: true },
-    { dim: "Category", t1: false, t2: true },
-    { dim: "ERP Family", t1: false, t2: true },
-    { dim: "Product", t1: false, t2: true },
-    { dim: "Supplier", t1: false, t2: true },
-    { dim: "Buyer", t1: false, t2: true },
-    { dim: "Planner", t1: false, t2: true },
-    { dim: "Budget", t1: true, t2: false },
-    { dim: "Reforecast", t1: true, t2: false },
-    { dim: "Aggregated Actual", t1: true, t2: false },
-    { dim: "Detailed Estimated Cost", t1: false, t2: true },
-  ];
-  return (
-    <div className="rounded-lg border border-slate-200 overflow-hidden">
-      <table className="w-full text-sm">
-        <thead className="bg-slate-50">
-          <tr>
-            <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Dimension</th>
-            <th className="text-center py-2 px-3 text-xs font-semibold text-emerald-600">monthly_budget_comparison</th>
-            <th className="text-center py-2 px-3 text-xs font-semibold text-blue-600">estimated</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ dim, t1, t2 }) => (
-            <tr key={dim} className="border-t border-slate-100">
-              <td className="py-2 px-3 font-medium text-slate-700">{dim}</td>
-              <td className="py-2 px-3 text-center">{t1 ? <span className="check">✓</span> : <span className="cross">✗</span>}</td>
-              <td className="py-2 px-3 text-center">{t2 ? <span style={{background:'#dbeafe',color:'#2563eb'}} className="check">✓</span> : <span className="cross">✗</span>}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div class="card-body collapsible-content" id="overview">
+      <p style="font-size:13px;color:#64748b;line-height:1.6;">
+        <strong style="color:#1e293b;">Pages 1 &amp; 2</strong> (Cockpit + Breakdown by Pole) are based on
+        <strong style="color:#1e293b;">aggregated data from the Google Sheet</strong>,
+        defined by <strong style="color:#1e293b;">category &times; month</strong> at the start of the year.
+        Data is consolidated by month, pole, and order type &mdash; no order-level detail is retained.
+      </p>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-label">Scope</div><div class="stat-value">Current Year</div></div>
+        <div class="stat-box"><div class="stat-label">Min. Date Granularity</div><div class="stat-value">Monthly</div></div>
+      </div>
+      <div class="section-label">Budget Coverage vs Cost Granularity</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Dimension</th>
+            <th class="center" style="color:#059669;">Budget</th>
+            <th class="center" style="color:#2563eb;">Actual / Estimated Cost</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>Month</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Pole</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Order Type</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>YTD / YTG</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Category <span style="font-size:11px;color:#94a3b8;">(budget source)</span></td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Product</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Supplier</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Buyer</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Planner</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>ERP Family</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Day</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:#94a3b8;margin-top:8px;font-style:italic;">* Detailed dimensions (product, supplier&hellip;) are only available via the <code>estimated</code> table.</p>
     </div>
-  );
-};
-const KpiTable = ({ rows }) => (
-  <div className="rounded-lg border border-slate-200 overflow-hidden">
-    <table className="w-full text-sm">
-      <thead className="bg-slate-50">
-        <tr>
-          <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">KPI</th>
-          <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Field</th>
-          <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Available Dimensions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map(({ kpi, field, dims }) => (
-          <tr key={kpi} className="border-t border-slate-100">
-            <td className="py-2 px-3 font-medium text-slate-700">{kpi}</td>
-            <td className="py-2 px-3"><code className="text-xs bg-slate-100 px-1.5 py-0.5 rounded font-mono">{field}</code></td>
-            <td className="py-2 px-3 text-slate-500 text-xs">{dims}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
   </div>
-);
-function App() {
-  return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white px-6 py-8 text-center">
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <span className="text-2xl">📊</span>
-          <h1 className="text-2xl font-bold tracking-tight">Purchase Dashboard</h1>
-        </div>
-        <p className="text-slate-300 text-sm">Technical documentation — Data sources, KPIs & available granularities</p>
-        <div className="flex flex-wrap justify-center gap-2 mt-3">
-          {["Cockpit", "Breakdown by Pole", "Estimated Spend"].map(label => (
-            <span key={label} className="text-xs px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/20">{label}</span>
-          ))}
-        </div>
+
+  <!-- TABLE 1 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle('table1')">
+      <div class="card-header-left">
+        <div class="card-icon bg-green">&#128451;</div>
+        <span class="card-title">Table 1 &mdash; monthly_budget_comparison (aggregated)</span>
       </div>
-      <div className="max-w-3xl mx-auto px-4 py-5">
-        <Section icon="ℹ️" title="Dashboard Overview" color="bg-slate-600">
-          <p className="text-sm text-slate-500 leading-relaxed mt-1">
-            <strong className="text-slate-800">Pages 1 & 2</strong> (Cockpit + Breakdown by Pole) are based on <strong className="text-slate-800">aggregated data from the Google Sheet</strong>, defined by <strong className="text-slate-800">category × month</strong> at the start of the year. Data is consolidated by month, pole, and order type — no order-level detail is retained.
-          </p>
-          <div className="grid grid-cols-2 gap-3 mt-3">
-            {[{ label: "Scope", value: "Current Year" }, { label: "Min. Date Granularity", value: "Monthly" }].map(({ label, value }) => (
-              <div key={label} className="bg-slate-50 rounded-lg p-3 text-center border border-slate-200">
-                <p className="text-xs text-slate-400">{label}</p>
-                <p className="text-sm font-semibold text-slate-700 mt-0.5">{value}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mt-4 mb-1">Budget Coverage vs Cost Granularity</p>
-          <CoverageTable />
-          <p className="text-xs text-slate-400 mt-2 italic">* Budget is only available at month × pole × order type level. Detailed dimensions are available only via the <code className="font-mono">estimated</code> table.</p>
-        </Section>
-        <Section icon="🗄️" title="Table 1 — monthly_budget_comparison (aggregated)" color="bg-emerald-600">
-          <p className="text-sm text-slate-500 mt-1 mb-3">Budget defined by <strong className="text-slate-700">category × month</strong> at the start of the year (source: Google Sheet). Full-year budget = sum of the 12 budgeted months.</p>
-          <Note emoji="📅" text="Date used corresponds to the reception date." />
-          <Note emoji="🔢" text="Budget = Quantity × unit budget cost." />
-          <Note emoji="⚠️" text="Budget is not available at all granularities." color="text-amber-600" />
-          <hr className="my-3 border-slate-100" />
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Available KPIs</p>
-          <KpiTable rows={[
-            { kpi: "Budget Cost", field: "budget_cost", dims: "Month · Pole · Order type · YTD/YTG" },
-            { kpi: "Budget Quantity", field: "budget_quantity", dims: "Month · Pole · Order type · YTD/YTG" },
-            { kpi: "Reforecast Cost", field: "reforecast_cost", dims: "Month · Pole · Order type · YTD/YTG" },
-            { kpi: "Reforecast Quantity", field: "reforecast_quantity", dims: "Month · Pole · Order type · YTD/YTG" },
-            { kpi: "Actual Cost", field: "actual_cost", dims: "Month · Pole · Order type · YTD/YTG" },
-            { kpi: "Actual Quantity", field: "actual_quantity", dims: "Month · Pole · Order type · YTD/YTG" },
-          ]} />
-        </Section>
-        <Section icon="📦" title="Table 2 — estimated (order-level detail)" color="bg-blue-600">
-          <p className="text-sm text-slate-500 mt-1 mb-3">Based on <strong className="text-slate-700">firm orders not yet received</strong> and <strong className="text-slate-700">suggested orders</strong>. Full-year view = real invoiced cost (past) + projected cost (future).</p>
-          <Note emoji="💰" text="Cost = last supplier purchase price, shipping included. If unavailable, budget cost is used." />
-          <Note emoji="⚠️" text='"Outdated Orders" filter: orders whose estimated date has passed — counted at today\'s date.' color="text-amber-600" />
-          <hr className="my-3 border-slate-100" />
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Available KPIs</p>
-          <KpiTable rows={[
-            { kpi: "Total Estimated Cost (incl. shipping)", field: "total_cost_incl_shipping", dims: "Day · Product · Category · Supplier · Buyer · Planner…" },
-            { kpi: "Quantity", field: "quantity", dims: "Day · Product · Category · Supplier · Buyer · Planner…" },
-          ]} />
-        </Section>
-        <Section icon="📋" title="Granularity Comparison" color="bg-purple-600">
-          <GranularityTable />
-        </Section>
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
-          <div className="flex items-center gap-2 px-4 py-3">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-slate-600 text-sm">🔗</div>
-            <span className="font-semibold text-slate-800 text-sm">Useful Links</span>
-          </div>
-          <div className="px-4 pb-4">
-            <a href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-3 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors group">
-              <div>
-                <p className="text-sm font-medium text-slate-700">Google Sheet — Annual Budget by Category</p>
-                <p className="text-xs text-slate-400 mt-0.5">Budget defined at start of year</p>
-              </div>
-              <span className="text-slate-400 text-sm ml-2">↗</span>
-            </a>
-          </div>
-        </div>
-        <p className="text-center text-xs text-slate-400 pb-4">Purchase Dashboard — Internal documentation · Aromazone BI Team</p>
+      <span class="card-toggle" id="table1-icon">&#9650;</span>
+    </div>
+    <div class="card-body collapsible-content" id="table1">
+      <p style="font-size:13px;color:#64748b;line-height:1.6;margin-bottom:10px;">
+        Budget defined by <strong style="color:#1e293b;">category &times; month</strong> at the start of the year (source: Google Sheet).
+        Full-year budget = sum of the 12 budgeted months.
+      </p>
+      <div class="note">&#128197; <span>Date used corresponds to the reception date.</span></div>
+      <div class="note">&#128290; <span>Budget = Quantity &times; unit budget cost.</span></div>
+      <div class="note note-warn">&#9888; <span>Budget is not available at all granularities.</span></div>
+      <hr/>
+      <div class="section-label">Available KPIs</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>KPI</th><th>Field</th><th>Available Dimensions</th></tr></thead>
+          <tbody>
+            <tr><td>Budget Cost</td><td><code>budget_cost</code></td><td style="color:#64748b;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+            <tr><td>Budget Quantity</td><td><code>budget_quantity</code></td><td style="color:#64748b;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+            <tr><td>Reforecast Cost</td><td><code>reforecast_cost</code></td><td style="color:#64748b;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+            <tr><td>Reforecast Quantity</td><td><code>reforecast_quantity</code></td><td style="color:#64748b;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+            <tr><td>Actual Cost</td><td><code>actual_cost</code></td><td style="color:#64748b;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+            <tr><td>Actual Quantity</td><td><code>actual_quantity</code></td><td style="color:#64748b;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  );
+  </div>
+
+  <!-- TABLE 2 -->
+  <div class="card">
+    <div class="card-header" onclick="toggle('table2')">
+      <div class="card-header-left">
+        <div class="card-icon bg-blue">&#128230;</div>
+        <span class="card-title">Table 2 &mdash; estimated (order-level detail)</span>
+      </div>
+      <span class="card-toggle" id="table2-icon">&#9650;</span>
+    </div>
+    <div class="card-body collapsible-content" id="table2">
+      <p style="font-size:13px;color:#64748b;line-height:1.6;margin-bottom:10px;">
+        Based on <strong style="color:#1e293b;">firm orders not yet received</strong> and
+        <strong style="color:#1e293b;">suggested orders</strong>.
+        Full-year view = real invoiced cost (past) + projected cost (future).
+      </p>
+      <div class="note">&#128176; <span>Cost = last supplier purchase price, shipping included. If unavailable, budget cost is used.</span></div>
+      <div class="note note-warn">&#9888; <span>"Outdated Orders" filter: orders whose estimated date has passed &mdash; counted at today's date.</span></div>
+      <hr/>
+      <div class="section-label">Available KPIs</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>KPI</th><th>Field</th><th>Available Dimensions</th></tr></thead>
+          <tbody>
+            <tr><td>Total Estimated Cost (incl. shipping)</td><td><code>total_cost_incl_shipping</code></td><td style="color:#64748b;">Day &middot; Product &middot; Category &middot; Supplier &middot; Buyer &middot; Planner&hellip;</td></tr>
+            <tr><td>Quantity</td><td><code>quantity</code></td><td style="color:#64748b;">Day &middot; Product &middot; Category &middot; Supplier &middot; Buyer &middot; Planner&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRANULARITY -->
+  <div class="card">
+    <div class="card-header" onclick="toggle('gran')">
+      <div class="card-header-left">
+        <div class="card-icon bg-purple">&#128203;</div>
+        <span class="card-title">Granularity Comparison</span>
+      </div>
+      <span class="card-toggle" id="gran-icon">&#9650;</span>
+    </div>
+    <div class="card-body collapsible-content" id="gran">
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Dimension</th>
+            <th class="center" style="color:#059669;">monthly_budget_comparison</th>
+            <th class="center" style="color:#2563eb;">estimated</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>Month</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Day</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Pole</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Category</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>ERP Family</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Product</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Supplier</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Buyer</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Planner</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+            <tr><td>Budget</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="cross">&#10007;</span></td></tr>
+            <tr><td>Reforecast</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="cross">&#10007;</span></td></tr>
+            <tr><td>Aggregated Actual</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="cross">&#10007;</span></td></tr>
+            <tr><td>Detailed Estimated Cost</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="card">
+    <div class="card-header" onclick="toggle('links')">
+      <div class="card-header-left">
+        <div class="card-icon bg-slate">&#128279;</div>
+        <span class="card-title">Useful Links</span>
+      </div>
+      <span class="card-toggle" id="links-icon">&#9650;</span>
+    </div>
+    <div class="card-body collapsible-content" id="links">
+      <a class="link-item" href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590" target="_blank">
+        <div>
+          <div class="link-title">Google Sheet &mdash; Annual Budget by Category</div>
+          <div class="link-sub">Budget defined at start of year</div>
+        </div>
+        <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">Purchase Dashboard &mdash; Internal documentation &middot; Aromazone BI Team</div>
+</div>
+
+<script>
+function toggle(id) {
+  var el = document.getElementById(id);
+  var icon = document.getElementById(id + '-icon');
+  if (el.classList.contains('hidden')) {
+    el.classList.remove('hidden');
+    icon.innerHTML = '&#9650;';
+  } else {
+    el.classList.add('hidden');
+    icon.innerHTML = '&#9660;';
+  }
 }
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
 </script>
-<div id="root"></div>
 </body>
 </html>
