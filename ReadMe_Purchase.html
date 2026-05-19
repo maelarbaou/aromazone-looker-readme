@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purchase Dashboard — ReadMe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; }
+    .check { display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#d1fae5;color:#059669;font-size:12px;font-weight:700; }
+    .cross { display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:9999px;background:#fee2e2;color:#f87171;font-size:12px;font-weight:700; }
+    tr:hover td { background: rgba(0,0,0,0.02); }
+    a { text-decoration:none; }
+  </style>
+</head>
+<body>
+<script type="text/babel">
+const { useState } = React;
+const Section = ({ icon, title, color, children }) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+      <div className="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onClick={() => setOpen(!open)}>
+        <div className="flex items-center gap-2">
+          <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-white text-sm ${color}`}>{icon}</div>
+          <span className="font-semibold text-slate-800 text-sm">{title}</span>
+        </div>
+        <span className="text-slate-400 text-xs">{open ? "▲" : "▼"}</span>
+      </div>
+      {open && <div className="px-4 pb-4 pt-0">{children}</div>}
+    </div>
+  );
+};
+const Note = ({ emoji, text, color }) => (
+  <div className="flex items-start gap-2 py-1">
+    <span className="text-base leading-none mt-0.5">{emoji}</span>
+    <span className={`text-sm ${color || "text-slate-500"}`}>{text}</span>
+  </div>
+);
+const CoverageTable = () => {
+  const rows = [
+    { dim: "Month", budget: true, cost: true },
+    { dim: "Pole", budget: true, cost: true },
+    { dim: "Order Type", budget: true, cost: true },
+    { dim: "YTD / YTG", budget: true, cost: true },
+    { dim: "Category", budget: true, cost: true, note: "budget source" },
+    { dim: "Product", budget: false, cost: true },
+    { dim: "Supplier", budget: false, cost: true },
+    { dim: "Buyer", budget: false, cost: true },
+    { dim: "Planner", budget: false, cost: true },
+    { dim: "ERP Family", budget: false, cost: true },
+    { dim: "Day", budget: false, cost: true },
+  ];
+  return (
+    <div className="rounded-lg border border-slate-200 overflow-hidden mt-3">
+      <table className="w-full text-sm">
+        <thead className="bg-slate-50">
+          <tr>
+            <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Dimension</th>
+            <th className="text-center py-2 px-3 text-xs font-semibold text-emerald-600">Budget</th>
+            <th className="text-center py-2 px-3 text-xs font-semibold text-blue-600">Actual / Estimated Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ dim, budget, cost, note }) => (
+            <tr key={dim} className="border-t border-slate-100">
+              <td className="py-2 px-3 font-medium text-slate-700">{dim}{note && <span className="ml-1.5 text-xs text-slate-400">({note})</span>}</td>
+              <td className="py-2 px-3 text-center">{budget ? <span className="check">✓</span> : <span className="cross">✗</span>}</td>
+              <td className="py-2 px-3 text-center">{cost ? <span style={{background:'#dbeafe',color:'#2563eb'}} className="check">✓</span> : <span className="cross">✗</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+const GranularityTable = () => {
+  const rows = [
+    { dim: "Month", t1: true, t2: true },
+    { dim: "Day", t1: false, t2: true },
+    { dim: "Pole", t1: true, t2: true },
+    { dim: "Category", t1: false, t2: true },
+    { dim: "ERP Family", t1: false, t2: true },
+    { dim: "Product", t1: false, t2: true },
+    { dim: "Supplier", t1: false, t2: true },
+    { dim: "Buyer", t1: false, t2: true },
+    { dim: "Planner", t1: false, t2: true },
+    { dim: "Budget", t1: true, t2: false },
+    { dim: "Reforecast", t1: true, t2: false },
+    { dim: "Aggregated Actual", t1: true, t2: false },
+    { dim: "Detailed Estimated Cost", t1: false, t2: true },
+  ];
+  return (
+    <div className="rounded-lg border border-slate-200 overflow-hidden">
+      <table className="w-full text-sm">
+        <thead className="bg-slate-50">
+          <tr>
+            <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Dimension</th>
+            <th className="text-center py-2 px-3 text-xs font-semibold text-emerald-600">monthly_budget_comparison</th>
+            <th className="text-center py-2 px-3 text-xs font-semibold text-blue-600">estimated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ dim, t1, t2 }) => (
+            <tr key={dim} className="border-t border-slate-100">
+              <td className="py-2 px-3 font-medium text-slate-700">{dim}</td>
+              <td className="py-2 px-3 text-center">{t1 ? <span className="check">✓</span> : <span className="cross">✗</span>}</td>
+              <td className="py-2 px-3 text-center">{t2 ? <span style={{background:'#dbeafe',color:'#2563eb'}} className="check">✓</span> : <span className="cross">✗</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+const KpiTable = ({ rows }) => (
+  <div className="rounded-lg border border-slate-200 overflow-hidden">
+    <table className="w-full text-sm">
+      <thead className="bg-slate-50">
+        <tr>
+          <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">KPI</th>
+          <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Field</th>
+          <th className="text-left py-2 px-3 text-xs font-semibold text-slate-500">Available Dimensions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(({ kpi, field, dims }) => (
+          <tr key={kpi} className="border-t border-slate-100">
+            <td className="py-2 px-3 font-medium text-slate-700">{kpi}</td>
+            <td className="py-2 px-3"><code className="text-xs bg-slate-100 px-1.5 py-0.5 rounded font-mono">{field}</code></td>
+            <td className="py-2 px-3 text-slate-500 text-xs">{dims}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+function App() {
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <div className="bg-gradient-to-br from-slate-800 to-slate-700 text-white px-6 py-8 text-center">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <span className="text-2xl">📊</span>
+          <h1 className="text-2xl font-bold tracking-tight">Purchase Dashboard</h1>
+        </div>
+        <p className="text-slate-300 text-sm">Technical documentation — Data sources, KPIs & available granularities</p>
+        <div className="flex flex-wrap justify-center gap-2 mt-3">
+          {["Cockpit", "Breakdown by Pole", "Estimated Spend"].map(label => (
+            <span key={label} className="text-xs px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/20">{label}</span>
+          ))}
+        </div>
+      </div>
+      <div className="max-w-3xl mx-auto px-4 py-5">
+        <Section icon="ℹ️" title="Dashboard Overview" color="bg-slate-600">
+          <p className="text-sm text-slate-500 leading-relaxed mt-1">
+            <strong className="text-slate-800">Pages 1 & 2</strong> (Cockpit + Breakdown by Pole) are based on <strong className="text-slate-800">aggregated data from the Google Sheet</strong>, defined by <strong className="text-slate-800">category × month</strong> at the start of the year. Data is consolidated by month, pole, and order type — no order-level detail is retained.
+          </p>
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            {[{ label: "Scope", value: "Current Year" }, { label: "Min. Date Granularity", value: "Monthly" }].map(({ label, value }) => (
+              <div key={label} className="bg-slate-50 rounded-lg p-3 text-center border border-slate-200">
+                <p className="text-xs text-slate-400">{label}</p>
+                <p className="text-sm font-semibold text-slate-700 mt-0.5">{value}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mt-4 mb-1">Budget Coverage vs Cost Granularity</p>
+          <CoverageTable />
+          <p className="text-xs text-slate-400 mt-2 italic">* Budget is only available at month × pole × order type level. Detailed dimensions are available only via the <code className="font-mono">estimated</code> table.</p>
+        </Section>
+        <Section icon="🗄️" title="Table 1 — monthly_budget_comparison (aggregated)" color="bg-emerald-600">
+          <p className="text-sm text-slate-500 mt-1 mb-3">Budget defined by <strong className="text-slate-700">category × month</strong> at the start of the year (source: Google Sheet). Full-year budget = sum of the 12 budgeted months.</p>
+          <Note emoji="📅" text="Date used corresponds to the reception date." />
+          <Note emoji="🔢" text="Budget = Quantity × unit budget cost." />
+          <Note emoji="⚠️" text="Budget is not available at all granularities." color="text-amber-600" />
+          <hr className="my-3 border-slate-100" />
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Available KPIs</p>
+          <KpiTable rows={[
+            { kpi: "Budget Cost", field: "budget_cost", dims: "Month · Pole · Order type · YTD/YTG" },
+            { kpi: "Budget Quantity", field: "budget_quantity", dims: "Month · Pole · Order type · YTD/YTG" },
+            { kpi: "Reforecast Cost", field: "reforecast_cost", dims: "Month · Pole · Order type · YTD/YTG" },
+            { kpi: "Reforecast Quantity", field: "reforecast_quantity", dims: "Month · Pole · Order type · YTD/YTG" },
+            { kpi: "Actual Cost", field: "actual_cost", dims: "Month · Pole · Order type · YTD/YTG" },
+            { kpi: "Actual Quantity", field: "actual_quantity", dims: "Month · Pole · Order type · YTD/YTG" },
+          ]} />
+        </Section>
+        <Section icon="📦" title="Table 2 — estimated (order-level detail)" color="bg-blue-600">
+          <p className="text-sm text-slate-500 mt-1 mb-3">Based on <strong className="text-slate-700">firm orders not yet received</strong> and <strong className="text-slate-700">suggested orders</strong>. Full-year view = real invoiced cost (past) + projected cost (future).</p>
+          <Note emoji="💰" text="Cost = last supplier purchase price, shipping included. If unavailable, budget cost is used." />
+          <Note emoji="⚠️" text='"Outdated Orders" filter: orders whose estimated date has passed — counted at today\'s date.' color="text-amber-600" />
+          <hr className="my-3 border-slate-100" />
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Available KPIs</p>
+          <KpiTable rows={[
+            { kpi: "Total Estimated Cost (incl. shipping)", field: "total_cost_incl_shipping", dims: "Day · Product · Category · Supplier · Buyer · Planner…" },
+            { kpi: "Quantity", field: "quantity", dims: "Day · Product · Category · Supplier · Buyer · Planner…" },
+          ]} />
+        </Section>
+        <Section icon="📋" title="Granularity Comparison" color="bg-purple-600">
+          <GranularityTable />
+        </Section>
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-4">
+          <div className="flex items-center gap-2 px-4 py-3">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-slate-600 text-sm">🔗</div>
+            <span className="font-semibold text-slate-800 text-sm">Useful Links</span>
+          </div>
+          <div className="px-4 pb-4">
+            <a href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-3 rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors group">
+              <div>
+                <p className="text-sm font-medium text-slate-700">Google Sheet — Annual Budget by Category</p>
+                <p className="text-xs text-slate-400 mt-0.5">Budget defined at start of year</p>
+              </div>
+              <span className="text-slate-400 text-sm ml-2">↗</span>
+            </a>
+          </div>
+        </div>
+        <p className="text-center text-xs text-slate-400 pb-4">Purchase Dashboard — Internal documentation · Aromazone BI Team</p>
+      </div>
+    </div>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
+<div id="root"></div>
+</body>
+</html>
