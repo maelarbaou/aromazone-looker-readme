@@ -2,154 +2,251 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Purchase Dashboard — ReadMe</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; }
-  .header { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: white; padding: 36px 24px; text-align: center; }
-  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-  .header p { color: #94a3b8; font-size: 13px; margin-top: 8px; }
-  .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
-  .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 11px; padding: 4px 12px; border-radius: 999px; }
-  .container { max-width: 780px; margin: 0 auto; padding: 20px 16px 40px; }
-  .card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .card-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; user-select: none; }
-  .card-header-left { display: flex; align-items: center; gap: 10px; }
-  .card-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-  .card-title { font-size: 14px; font-weight: 600; color: #1e293b; }
-  .card-toggle { font-size: 11px; color: #94a3b8; }
-  .card-body { padding: 0 16px 16px; }
-  .bg-slate { background: #475569; }
-  .bg-green { background: #059669; }
-  .bg-blue { background: #2563eb; }
+  html, body { width: 1200px; height: 900px; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 12px 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left h1 { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .header-left p { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .badges { display: flex; gap: 6px; }
+  .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 10px; padding: 3px 9px; border-radius: 999px; }
+
+  /* CONTENT */
+  .content { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; padding: 10px; height: 832px; }
+
+  /* CARDS */
+  .card { background: white; border: 1px solid #e2e8f0; border-radius: 9px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .card + .card { margin-top: 10px; }
+  .card-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid #f1f5f9; }
+  .card-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .card-title { font-size: 12px; font-weight: 600; color: #1e293b; }
+  .card-body { padding: 10px 12px; }
+  .bg-slate  { background: #475569; }
+  .bg-green  { background: #059669; }
+  .bg-blue   { background: #2563eb; }
   .bg-purple { background: #7c3aed; }
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
-  .stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; }
-  .stat-label { font-size: 11px; color: #94a3b8; }
-  .stat-value { font-size: 13px; font-weight: 600; color: #334155; margin-top: 2px; }
-  .note { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; font-size: 13px; color: #64748b; }
+
+  /* STAT GRID */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 8px 0; }
+  .stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px; text-align: center; }
+  .stat-label { font-size: 10px; color: #94a3b8; }
+  .stat-value { font-size: 11px; font-weight: 600; color: #334155; margin-top: 1px; }
+
+  /* NOTES */
+  .note { display: flex; align-items: flex-start; gap: 6px; padding: 3px 0; font-size: 11px; color: #64748b; }
   .note-warn { color: #b45309; }
-  .table-wrap { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin-top: 10px; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+  /* TABLES */
+  .table-wrap { border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; margin-top: 7px; }
+  table { width: 100%; border-collapse: collapse; }
   thead { background: #f8fafc; }
-  th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; }
-  th.center { text-align: center; }
-  td { padding: 8px 12px; border-top: 1px solid #f1f5f9; color: #334155; }
-  td.center { text-align: center; }
+  th { padding: 5px 9px; text-align: left; font-size: 9px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; }
+  th.c { text-align: center; }
+  td { padding: 5px 9px; border-top: 1px solid #f1f5f9; font-size: 11px; color: #334155; }
+  td.c { text-align: center; }
   tr:hover td { background: #f8fafc; }
-  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; }
-  .check-g { display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#d1fae5;color:#059669;font-size:11px;font-weight:700; }
-  .check-b { display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#dbeafe;color:#2563eb;font-size:11px;font-weight:700; }
-  .cross { display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#fee2e2;color:#f87171;font-size:11px;font-weight:700; }
-  .section-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; }
-  hr { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; }
-  .link-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: background 0.15s; }
+  code { background: #f1f5f9; padding: 1px 4px; border-radius: 3px; font-family: monospace; font-size: 10px; }
+
+  .ck-g { display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#d1fae5;color:#059669;font-size:9px;font-weight:700; }
+  .ck-b { display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#dbeafe;color:#2563eb;font-size:9px;font-weight:700; }
+  .cr   { display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#fee2e2;color:#f87171;font-size:9px;font-weight:700; }
+
+  .sec-label { font-size: 9px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin: 8px 0 4px; }
+  hr { border: none; border-top: 1px solid #f1f5f9; margin: 7px 0; }
+
+  .link-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 6px; text-decoration: none; color: inherit; }
   .link-item:hover { background: #f8fafc; }
-  .link-title { font-size: 13px; font-weight: 500; color: #334155; }
-  .link-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
-  .footer { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 8px; }
-  .collapsible-content { display: block; }
-  .collapsible-content.hidden { display: none; }
+  .link-title { font-size: 11px; font-weight: 500; color: #334155; }
+  .link-sub { font-size: 10px; color: #94a3b8; margin-top: 1px; }
+
+  .footer { text-align: center; font-size: 10px; color: #94a3b8; padding: 6px 0 0; }
+
+  p.desc { font-size: 11px; color: #64748b; line-height: 1.5; }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <h1>&#128202; Purchase Dashboard</h1>
-  <p> Data sources, KPIs &amp; available granularities</p>
+  <div class="header-left">
+    <h1>&#128202; Purchase Dashboard</h1>
+    <p>Technical documentation &mdash; Data sources, KPIs &amp; available granularities</p>
+  </div>
   <div class="badges">
     <span class="badge">Cockpit</span>
-    <span class="badge">MHA Overview Full Year</span>
     <span class="badge">Breakdown by Pole</span>
-    <span class="badge">Deep Dive MHA</span>
+    <span class="badge">Estimated Spend</span>
   </div>
 </div>
 
-<div class="container">
+<!-- 3 COLUMNS -->
+<div class="content">
 
-  <!-- OVERVIEW -->
-  <div class="card">
-    <div class="card-header" onclick="toggle('overview')">
-      <div class="card-header-left">
+  <!-- COL 1: OVERVIEW -->
+  <div style="display:flex;flex-direction:column;gap:0;">
+    <div class="card">
+      <div class="card-header">
         <div class="card-icon bg-slate">&#8505;</div>
         <span class="card-title">Dashboard Overview</span>
       </div>
-      <span class="card-toggle" id="overview-icon">&#9650;</span>
-    </div>
-    <div class="card-body collapsible-content" id="overview">
-      <p style="font-size:13px;color:#64748b;line-height:1.6;">
-        <strong style="color:#1e293b;">Pages 1 &amp; 2</strong> (Cockpit + Breakdown by Pole) are based on
-        <strong style="color:#1e293b;">aggregated data from the Google Sheet</strong>,
-        defined by <strong style="color:#1e293b;">category &times; month</strong> at the start of the year.
-        Data is consolidated by month, pole, and order type &mdash; no order-level detail is retained.
-      </p>
-      <div class="stat-grid">
-        <div class="stat-box"><div class="stat-label">Scope</div><div class="stat-value">Current Year</div></div>
-        <div class="stat-box"><div class="stat-label">Min. Date Granularity</div><div class="stat-value">Monthly</div></div>
+      <div class="card-body">
+        <p class="desc">
+          <strong style="color:#1e293b;">Pages 1 &amp; 2</strong> (Cockpit + Breakdown by Pole) are based on
+          <strong style="color:#1e293b;">aggregated data from the Google Sheet</strong>,
+          defined by <strong style="color:#1e293b;">category &times; month</strong> at the start of the year.
+          Consolidated by month, pole and order type &mdash; no order-level detail retained.
+        </p>
+        <div class="stat-grid">
+          <div class="stat-box"><div class="stat-label">Scope</div><div class="stat-value">Current Year</div></div>
+          <div class="stat-box"><div class="stat-label">Min. Granularity</div><div class="stat-value">Monthly</div></div>
+        </div>
+        <div class="sec-label">Budget Coverage vs Cost Granularity</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Dimension</th>
+              <th class="c" style="color:#059669;">Budget</th>
+              <th class="c" style="color:#2563eb;">Actual / Est. Cost</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>Month</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Pole</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Order Type</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>YTD / YTG</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Category</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Product</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Supplier</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Buyer</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Planner</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>ERP Family</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Day</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:9px;color:#94a3b8;margin-top:5px;font-style:italic;">* Detailed dims only available via <code>estimated</code> table.</p>
       </div>
-      <div class="section-label">Budget Coverage vs Cost Granularity</div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr>
-            <th>Dimension</th>
-            <th class="center" style="color:#059669;">Budget</th>
-            <th class="center" style="color:#2563eb;">Actual / Estimated Cost</th>
-          </tr></thead>
-          <tbody>
-            <tr><td>Month</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Pole</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Order Type</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>YTD / YTG</td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Category <span style="font-size:11px;color:#94a3b8;">(budget source)</span></td><td class="center"><span class="check-g">&#10003;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Product</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Supplier</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Buyer</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Planner</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>ERP Family</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-            <tr><td>Day</td><td class="center"><span class="cross">&#10007;</span></td><td class="center"><span class="check-b">&#10003;</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size:11px;color:#94a3b8;margin-top:8px;font-style:italic;">* Detailed dimensions (product, supplier&hellip;) are only available via the <code>estimated</code> table.</p>
     </div>
   </div>
 
-  <!-- LINKS -->
-  <div class="card">
-    <div class="card-header" onclick="toggle('links')">
-      <div class="card-header-left">
+  <!-- COL 2: TABLE 1 + TABLE 2 -->
+  <div style="display:flex;flex-direction:column;gap:10px;">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon bg-green">&#128451;</div>
+        <span class="card-title">monthly_budget_comparison (aggregated)</span>
+      </div>
+      <div class="card-body">
+        <p class="desc">Budget defined by <strong style="color:#1e293b;">category &times; month</strong> at the start of the year (Google Sheet). Full-year = sum of 12 budgeted months.</p>
+        <div style="margin-top:6px;">
+          <div class="note">&#128197; <span>Date = reception date.</span></div>
+          <div class="note">&#128290; <span>Budget = Quantity &times; unit budget cost.</span></div>
+          <div class="note note-warn">&#9888; <span>Budget not available at all granularities.</span></div>
+        </div>
+        <hr/>
+        <div class="sec-label">Available KPIs</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>KPI</th><th>Field</th><th>Dimensions</th></tr></thead>
+            <tbody>
+              <tr><td>Budget Cost</td><td><code>budget_cost</code></td><td style="color:#94a3b8;font-size:10px;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+              <tr><td>Budget Qty</td><td><code>budget_quantity</code></td><td style="color:#94a3b8;font-size:10px;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+              <tr><td>Reforecast Cost</td><td><code>reforecast_cost</code></td><td style="color:#94a3b8;font-size:10px;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+              <tr><td>Reforecast Qty</td><td><code>reforecast_quantity</code></td><td style="color:#94a3b8;font-size:10px;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+              <tr><td>Actual Cost</td><td><code>actual_cost</code></td><td style="color:#94a3b8;font-size:10px;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+              <tr><td>Actual Qty</td><td><code>actual_quantity</code></td><td style="color:#94a3b8;font-size:10px;">Month &middot; Pole &middot; Order type &middot; YTD/YTG</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon bg-blue">&#128230;</div>
+        <span class="card-title">estimated (order-level detail)</span>
+      </div>
+      <div class="card-body">
+        <p class="desc">Based on <strong style="color:#1e293b;">firm orders not yet received</strong> + <strong style="color:#1e293b;">suggested orders</strong>. Full-year = real invoiced cost (past) + projected cost (future).</p>
+        <div style="margin-top:6px;">
+          <div class="note">&#128176; <span>Cost = last supplier price incl. shipping. Fallback: budget cost.</span></div>
+          <div class="note note-warn">&#9888; <span>Outdated Orders: estimated date passed, counted at today.</span></div>
+        </div>
+        <hr/>
+        <div class="sec-label">Available KPIs</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>KPI</th><th>Field</th><th>Dimensions</th></tr></thead>
+            <tbody>
+              <tr><td>Total Cost (incl. shipping)</td><td><code>total_cost_incl_shipping</code></td><td style="color:#94a3b8;font-size:10px;">Day &middot; Product &middot; Category &middot; Supplier &middot; Buyer &middot; Planner&hellip;</td></tr>
+              <tr><td>Quantity</td><td><code>quantity</code></td><td style="color:#94a3b8;font-size:10px;">Day &middot; Product &middot; Category &middot; Supplier &middot; Buyer &middot; Planner&hellip;</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COL 3: GRANULARITY + LINKS -->
+  <div style="display:flex;flex-direction:column;gap:10px;">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon bg-purple">&#128203;</div>
+        <span class="card-title">Granularity Comparison</span>
+      </div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Dimension</th>
+              <th class="c" style="color:#059669;">monthly_budget</th>
+              <th class="c" style="color:#2563eb;">estimated</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>Month</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Day</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Pole</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Category</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>ERP Family</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Product</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Supplier</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Buyer</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Planner</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+              <tr><td>Budget</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="cr">&#10007;</span></td></tr>
+              <tr><td>Reforecast</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="cr">&#10007;</span></td></tr>
+              <tr><td>Aggregated Actual</td><td class="c"><span class="ck-g">&#10003;</span></td><td class="c"><span class="cr">&#10007;</span></td></tr>
+              <tr><td>Detailed Est. Cost</td><td class="c"><span class="cr">&#10007;</span></td><td class="c"><span class="ck-b">&#10003;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
         <div class="card-icon bg-slate">&#128279;</div>
         <span class="card-title">Useful Links</span>
       </div>
-      <span class="card-toggle" id="links-icon">&#9650;</span>
+      <div class="card-body">
+        <a class="link-item" href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590" target="_blank">
+          <div>
+            <div class="link-title">Google Sheet &mdash; Annual Budget by Category</div>
+            <div class="link-sub">Budget defined at start of year</div>
+          </div>
+          <span style="color:#94a3b8;font-size:13px;">&#8599;</span>
+        </a>
+      </div>
     </div>
-    <div class="card-body collapsible-content" id="links">
-      <a class="link-item" href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590" target="_blank">
-        <div>
-          <div class="link-title">Google Sheet &mdash; Annual Budget by Category</div>
-          <div class="link-sub">Budget defined at start of year</div>
-        </div>
-        <span class="arrow">&#8599;</span>
-      </a>
-    </div>
+
+    <div class="footer">Purchase Dashboard &mdash; Internal documentation &middot; Aromazone BI Team</div>
+
   </div>
 
-  <div class="footer">Purchase Dashboard &mdash; Internal documentation &middot; Aromazone BI Team</div>
 </div>
-
-<script>
-function toggle(id) {
-  var el = document.getElementById(id);
-  var icon = document.getElementById(id + '-icon');
-  if (el.classList.contains('hidden')) {
-    el.classList.remove('hidden');
-    icon.innerHTML = '&#9650;';
-  } else {
-    el.classList.add('hidden');
-    icon.innerHTML = '&#9660;';
-  }
-}
-</script>
 </body>
 </html>
