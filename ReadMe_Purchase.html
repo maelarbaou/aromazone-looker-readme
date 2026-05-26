@@ -1,13 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=900, initial-scale=1.0" />
+
   <title>Purchasing Performance Dashboard</title>
 
   <style>
-    body {
+
+    * { box-sizing: border-box; }
+
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 900px;
+      height: 1200px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    #scale-wrapper {
+      width: 1280px;
+      transform-origin: top left;
       background: #f8fafc;
       color: #0f172a;
       font-family: Arial, Helvetica, sans-serif;
@@ -351,239 +368,225 @@
       color: #020617;
     }
 
-    @media (max-width: 1100px) {
-      .grid-4,
-      .grid-5,
-      .grid-2,
-      .capability-grid,
-      .scope-layout {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 40px;
-      }
-
-      .page {
-        padding: 20px;
-      }
-
-      .hero {
-        padding: 32px 28px;
-      }
-    }
   </style>
+
 </head>
 
 <body>
-  <main class="page">
 
-    <section class="hero">
-      <div class="badge">Executive Summary</div>
-      <h1>Purchasing Performance Dashboard</h1>
-      <p class="hero-text">
-        A single, shared and reliable platform to steer purchasing performance across all departments,
-        from executive-level oversight to granular operational insights.
-      </p>
-    </section>
+  <div id="scale-wrapper">
+    <main class="page">
 
-    <section class="grid-4">
-      <div class="card small">
-        <div class="icon">🎯</div>
-        <h3>Core Ambition</h3>
-        <p>
-          Create one shared platform to steer purchasing performance, from executive oversight to detailed
-          operational analysis by SKU, reference, supplier, category or buyer.
+      <section class="hero">
+        <div class="badge">Executive Summary</div>
+        <h1>Purchasing Performance Dashboard</h1>
+        <p class="hero-text">
+          A single, shared and reliable platform to steer purchasing performance across all departments,
+          from executive-level oversight to granular operational insights.
         </p>
-      </div>
+      </section>
 
-      <div class="card small">
-        <div class="icon">📈</div>
-        <h3>Business Scope</h3>
-        <p>
-          Track purchasing spend and PPV performance by comparing budget, actuals to date and future projections,
-          highlighting gaps between forecast and execution.
-        </p>
-      </div>
+      <section class="grid-4">
+        <div class="card small">
+          <div class="icon">🎯</div>
+          <h3>Core Ambition</h3>
+          <p>
+            Create one shared platform to steer purchasing performance, from executive oversight to detailed
+            operational analysis by SKU, reference, supplier, category or buyer.
+          </p>
+        </div>
+        <div class="card small">
+          <div class="icon">📈</div>
+          <h3>Business Scope</h3>
+          <p>
+            Track purchasing spend and PPV performance by comparing budget, actuals to date and future projections,
+            highlighting gaps between forecast and execution.
+          </p>
+        </div>
+        <div class="card small">
+          <div class="icon">🧭</div>
+          <h3>Drill-Down Model</h3>
+          <p>
+            Enable progressive navigation across levels: management view, business poles such as Packaging,
+            Raw Materials and Subcontracting, then dynamic detailed filters.
+          </p>
+        </div>
+        <div class="card small">
+          <div class="icon">🗄️</div>
+          <h3>Target Solution</h3>
+          <p>
+            Consolidate current Looker dashboards and Excel-based processes into one automated, reliable and
+            stabilized source of truth.
+          </p>
+        </div>
+      </section>
 
-      <div class="card small">
-        <div class="icon">🧭</div>
-        <h3>Drill-Down Model</h3>
-        <p>
-          Enable progressive navigation across levels: management view, business poles such as Packaging,
-          Raw Materials and Subcontracting, then dynamic detailed filters.
-        </p>
-      </div>
-
-      <div class="card small">
-        <div class="icon">🗄️</div>
-        <h3>Target Solution</h3>
-        <p>
-          Consolidate current Looker dashboards and Excel-based processes into one automated, reliable and
-          stabilized source of truth.
-        </p>
-      </div>
-    </section>
-
-    <section class="grid-5">
-      <div class="card">
-        <p class="section-kicker">Operating model</p>
-        <h2>Key capabilities</h2>
-
-        <div class="capability-grid">
-          <div class="capability">
-            <div class="icon">⏱️</div>
-            <h3>Performance control</h3>
-            <p>Centralized monitoring of purchasing spend and performance KPIs.</p>
-          </div>
-
-          <div class="capability">
-            <div class="icon">🔁</div>
-            <h3>Variance tracking</h3>
-            <p>Clear comparison between budget, actuals and forward-looking projections.</p>
-          </div>
-
-          <div class="capability">
-            <div class="icon">🔎</div>
-            <h3>Granular analysis</h3>
-            <p>Deep dives by SKU, supplier, category, buyer and business pole.</p>
-          </div>
-
-          <div class="capability">
-            <div class="icon">🎚️</div>
-            <h3>Standard filters</h3>
-            <p>Consistent and dynamic filters for shared cross-department analysis.</p>
-          </div>
-
-          <div class="capability">
-            <div class="icon">⚙️</div>
-            <h3>Automated source</h3>
-            <p>Progressive migration from fragmented tools to one reliable solution.</p>
+      <section class="grid-5">
+        <div class="card">
+          <p class="section-kicker">Operating model</p>
+          <h2>Key capabilities</h2>
+          <div class="capability-grid">
+            <div class="capability">
+              <div class="icon">⏱️</div>
+              <h3>Performance control</h3>
+              <p>Centralized monitoring of purchasing spend and performance KPIs.</p>
+            </div>
+            <div class="capability">
+              <div class="icon">🔁</div>
+              <h3>Variance tracking</h3>
+              <p>Clear comparison between budget, actuals and forward-looking projections.</p>
+            </div>
+            <div class="capability">
+              <div class="icon">🔎</div>
+              <h3>Granular analysis</h3>
+              <p>Deep dives by SKU, supplier, category, buyer and business pole.</p>
+            </div>
+            <div class="capability">
+              <div class="icon">🎚️</div>
+              <h3>Standard filters</h3>
+              <p>Consistent and dynamic filters for shared cross-department analysis.</p>
+            </div>
+            <div class="capability">
+              <div class="icon">⚙️</div>
+              <h3>Automated source</h3>
+              <p>Progressive migration from fragmented tools to one reliable solution.</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="dark-card">
-        <div class="icon">🚚</div>
-        <h2>Future extension</h2>
-        <p style="margin-top: 24px;">
-          A dedicated supplier performance module will be added, including OTIF tracking, to cover the full
-          Purchasing Department agenda: spend, PPV, supplier reliability and service performance.
-        </p>
-      </div>
-    </section>
+        <div class="dark-card">
+          <div class="icon">🚚</div>
+          <h2>Future extension</h2>
+          <p style="margin-top: 24px;">
+            A dedicated supplier performance module will be added, including OTIF tracking, to cover the full
+            Purchasing Department agenda: spend, PPV, supplier reliability and service performance.
+          </p>
+        </div>
+      </section>
 
-    <section class="card scope-card">
-      <div class="scope-layout">
-        <div class="scope-stats">
-          <div class="stat-box">
-            <div class="stat-label">Scope</div>
-            <div class="stat-value">Current Year</div>
+      <section class="card scope-card">
+        <div class="scope-layout">
+          <div class="scope-stats">
+            <div class="stat-box">
+              <div class="stat-label">Scope</div>
+              <div class="stat-value">Current Year</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Min. Granularity</div>
+              <div class="stat-value">Monthly</div>
+            </div>
           </div>
+          <div>
+            <div class="scope-content-header">
+              <div class="inline-icon">ℹ️</div>
+              <h2>Data Scope &amp; Granularity</h2>
+            </div>
+            <p>
+              <strong>Pages 1 and 2</strong> (Cockpit and Breakdown by Pole) rely on aggregated Google Sheet data,
+              defined by <strong>category × month</strong> at the start of the year. Data is consolidated by month,
+              pole and order type, with no order-level detail retained.
+            </p>
+          </div>
+        </div>
 
-          <div class="stat-box">
-            <div class="stat-label">Min. Granularity</div>
-            <div class="stat-value">Monthly</div>
+        <div class="table-section">
+          <p class="section-kicker">Budget vs MHA granularity</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th class="center">Budget</th>
+                  <th class="center">Actual / Est.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Month</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Pole</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Order Type</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>YTD / YTG</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Category</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Product</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Supplier</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Buyer</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Planner</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>ERP Family</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
+                <tr><td>Day</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top: 10px; font-size: 12px; font-style: italic; color: #64748b;">
+            Detailed dimensions are only available through the estimated table.
+          </p>
+        </div>
+      </section>
+
+      <section class="grid-2">
+        <div>
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="icon">🗃️</div>
+            <h3>monthly_budget_comparison</h3>
+            <p>
+              Aggregated budget defined by <strong>category × month</strong> at the start of the year from Google Sheet.
+              Full-year budget equals the sum of the 12 budgeted months.
+            </p>
+            <div class="note">📅 <span>Date is based on reception date.</span></div>
+            <div class="note"># <span>Budget equals quantity multiplied by unit budget cost.</span></div>
+          </div>
+          <div class="card">
+            <div class="icon">📦</div>
+            <h3>estimated</h3>
+            <p>
+              Order-level detail based on <strong>firm orders not yet received</strong> and
+              <strong>suggested orders</strong>. Full-year cost combines real invoiced cost for past periods and
+              projected cost for future periods.
+            </p>
+            <div class="note"># <span>Cost equals last supplier price including shipping. Fallback is budget cost.</span></div>
+            <div class="note warning">⚠ <span>Outdated orders: estimated date passed, counted at today.</span></div>
           </div>
         </div>
 
         <div>
-          <div class="scope-content-header">
-            <div class="inline-icon">ℹ️</div>
-            <h2>Data Scope &amp; Granularity</h2>
+          <div class="card" style="margin-bottom: 24px;">
+            <div class="icon">🔗</div>
+            <h3>Useful links</h3>
+            <a
+              class="link-card"
+              href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590"
+              target="_blank"
+            >
+              <div>
+                <div class="link-title">Google Sheet, Annual Budget by Category</div>
+                <div class="link-sub">Budget defined at start of year</div>
+              </div>
+              <div>↗</div>
+            </a>
           </div>
-
-          <p>
-            <strong>Pages 1 and 2</strong> (Cockpit and Breakdown by Pole) rely on aggregated Google Sheet data,
-            defined by <strong>category × month</strong> at the start of the year. Data is consolidated by month,
-            pole and order type, with no order-level detail retained.
-          </p>
         </div>
-      </div>
+      </section>
 
-      <div class="table-section">
-        <p class="section-kicker">Budget vs MHA granularity</p>
+    </main>
+  </div>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Dimension</th>
-                <th class="center">Budget</th>
-                <th class="center">Actual / Est.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Month</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Pole</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Order Type</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>YTD / YTG</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Category</td><td class="center yes-green">✓</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Product</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Supplier</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Buyer</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Planner</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>ERP Family</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
-              <tr><td>Day</td><td class="center no">✕</td><td class="center yes-blue">✓</td></tr>
-            </tbody>
-          </table>
-        </div>
+  <script>
+    window.addEventListener('load', function () {
+      var wrapper = document.getElementById('scale-wrapper');
+      var PAGE_W = 900;
+      var PAGE_H = 1200;
+      var NATURAL_W = 1280;
 
-        <p style="margin-top: 10px; font-size: 12px; font-style: italic; color: #64748b;">
-          Detailed dimensions are only available through the estimated table.
-        </p>
-      </div>
-    </section>
+      // Measure natural height at full 1280px width (no transform applied yet)
+      var naturalH = wrapper.offsetHeight;
 
-    <section class="grid-2">
-      <div>
-        <div class="card" style="margin-bottom: 24px;">
-          <div class="icon">🗃️</div>
-          <h3>monthly_budget_comparison</h3>
-          <p>
-            Aggregated budget defined by <strong>category × month</strong> at the start of the year from Google Sheet.
-            Full-year budget equals the sum of the 12 budgeted months.
-          </p>
-          <div class="note">📅 <span>Date is based on reception date.</span></div>
-          <div class="note"># <span>Budget equals quantity multiplied by unit budget cost.</span></div>
-        </div>
+      // Scale to fit both width and height — take the most restrictive constraint
+      var scaleX = PAGE_W / NATURAL_W;
+      var scaleY = PAGE_H / naturalH;
+      var scale  = Math.min(scaleX, scaleY);
 
-        <div class="card">
-          <div class="icon">📦</div>
-          <h3>estimated</h3>
-          <p>
-            Order-level detail based on <strong>firm orders not yet received</strong> and
-            <strong>suggested orders</strong>. Full-year cost combines real invoiced cost for past periods and
-            projected cost for future periods.
-          </p>
-          <div class="note"># <span>Cost equals last supplier price including shipping. Fallback is budget cost.</span></div>
-          <div class="note warning">⚠ <span>Outdated orders: estimated date passed, counted at today.</span></div>
-        </div>
-      </div>
+      wrapper.style.transform = 'scale(' + scale + ')';
+      wrapper.style.transformOrigin = 'top left';
+    });
+  </script>
 
-      <div>
-        <div class="card" style="margin-bottom: 24px;">
-          <div class="icon">🔗</div>
-          <h3>Useful links</h3>
-          <a
-            class="link-card"
-            href="https://docs.google.com/spreadsheets/d/178DXmQdALxBS9QWbE5p5ND9N0eYUdOtLa44-wLipaLw/edit#gid=989150590"
-            target="_blank"
-          >
-            <div>
-              <div class="link-title">Google Sheet, Annual Budget by Category</div>
-              <div class="link-sub">Budget defined at start of year</div>
-            </div>
-            <div>↗</div>
-          </a>
-        </div>
-
-        <div class="footer">
-          Purchase Dashboard, Aromazone Data Team
-        </div>
-      </div>
-    </section>
-
-  </main>
 </body>
 </html>
