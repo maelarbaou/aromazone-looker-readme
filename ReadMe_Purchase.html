@@ -28,12 +28,13 @@
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 18px;
-      padding: 22px 26px;
+      padding: 14px 13px;
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
       margin-bottom: 14px;
     }
 
     .badge {
+      background: #c1dbc3;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -44,13 +45,13 @@
       font-weight: 700;
       letter-spacing: 1.2px;
       text-transform: uppercase;
-      color: #64748b;
+      color: #36393f;
       margin-bottom: 10px;
     }
 
     h1 {
       margin: 0;
-      font-size: 32px;
+      font-size: 18px;
       line-height: 1.05;
       letter-spacing: -1px;
       color: #020617;
@@ -58,7 +59,7 @@
 
     .hero-text {
       margin: 10px 0 0;
-      font-size: 13px;
+      font-size: 11px;
       line-height: 1.55;
       color: #64748b;
     }
@@ -72,7 +73,7 @@
 
     .grid-5 {
       display: grid;
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 9fr 0.5fr;
       gap: 14px;
       margin-bottom: 14px;
     }
@@ -134,7 +135,7 @@
 
     .section-kicker {
       margin: 0 0 5px;
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 700;
       letter-spacing: 1.2px;
       text-transform: uppercase;
@@ -143,7 +144,7 @@
 
     h2 {
       margin: 0;
-      font-size: 16px;
+      font-size: 13px;
       letter-spacing: -0.3px;
       color: #020617;
     }
@@ -154,7 +155,7 @@
 
     h3 {
       margin: 0 0 6px;
-      font-size: 11px;
+      font-size: 9px;
       font-weight: 800;
       letter-spacing: 0.4px;
       text-transform: uppercase;
@@ -167,14 +168,14 @@
 
     p {
       margin: 0;
-      font-size: 11px;
+      font-size: 9px;
       line-height: 1.5;
       color: #475569;
     }
 
     .capability-grid {
-      display: flex;
-      flex-wrap: nowrap; /* empêche le retour à la ligne */
+      display: grid;
+      grid-template-columns: repeat(5, 2fr);
       gap: 9px;
       margin-top: 12px;
     }
@@ -190,7 +191,7 @@
       margin-bottom: 8px;
       width: 24px;
       height: 24px;
-      font-size: 12px;
+      font-size: 9px;
     }
 
     /* ── Scope card ── */
@@ -220,7 +221,7 @@
     }
 
     .scope-content-header h2 {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     /* Stat pills – horizontal */
@@ -235,12 +236,12 @@
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 10px;
-      padding: 8px 12px;
+      padding: 9px 35px;
       white-space: nowrap;
     }
 
     .stat-label {
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -249,7 +250,7 @@
 
     .stat-value {
       margin-top: 3px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       color: #020617;
     }
@@ -270,7 +271,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 10px;
+      font-size: 8px;
     }
 
     th {
@@ -418,9 +419,7 @@
     </section>
 
     <!-- GRID 5 -->
-    <section class="grid-5">
-      <div class="card">
-        <p class="section-kicker">Operating model</p>
+    <section class="card">
         <h2>Key capabilities</h2>
         <div class="capability-grid">
           <div class="capability">
@@ -449,7 +448,6 @@
             <p>Progressive migration from fragmented tools to one reliable solution.</p>
           </div>
         </div>
-      </div>
     </section>
 
     <!-- SCOPE CARD -->
@@ -553,7 +551,7 @@
           <div class="note warning">⚠ <span>Outdated orders: estimated date passed, counted at today.</span></div>
         </div>
       </div>
-
+      
       <div>
         <div class="card" style="margin-bottom: 12px;">
           <div class="icon">🔗</div>
@@ -570,8 +568,7 @@
             <div>↗</div>
           </a>
         </div>
-      </div>
-      <div class="dark-card">
+        <div class="dark-card">
         <div class="icon">🚚</div>
         <h2>Future extension</h2>
         <p style="margin-top: 12px;">
@@ -579,6 +576,8 @@
           Purchasing Department agenda: spend, PPV, supplier reliability and service performance.
         </p>
       </div>
+      </div>
+      
     </section>
 
   </main>
