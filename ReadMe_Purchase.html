@@ -173,8 +173,8 @@
     }
 
     .capability-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: nowrap; /* empêche le retour à la ligne */
       gap: 9px;
       margin-top: 12px;
     }
